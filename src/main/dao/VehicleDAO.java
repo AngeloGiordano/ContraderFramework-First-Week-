@@ -23,7 +23,7 @@ public class VehicleDAO {
                 String brand = resultSet.getString("brand");
                 String model = resultSet.getString("model");
                 String power = resultSet.getString("power");
-                veicolo.add(new Vehicle(idVehicle, brand, model, power);
+                veicolo.add(new Vehicle(idVehicle, brand, model, power));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class VehicleDAO {
     }
     public boolean insertVehicle(Vehicle vehicle){
         Connection connection=ConnectionSingleton.getInstance();
-        String queryinsertVehicle="INSERT INTO vehicle (idVehicle,brand,model,power,version,capacity) values(null,?,?,?,?,?)";
+        String queryinsertVehicle="INSERT INTO vehicle (idVehicle,brand,model,power) values(null,?,?,?)";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(queryinsertVehicle);
             preparedStatement.setString(1,vehicle.getBrand());

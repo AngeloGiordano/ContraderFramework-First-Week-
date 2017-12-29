@@ -2,7 +2,6 @@ package main.view;
 import main.MainDispatcher;
 import main.controller.Request;
 import main.model.Gomma;
-import main.dao.GommaDAO;
 import main.service.GommaService;
 
 import java.util.List;
@@ -12,15 +11,22 @@ public class GommaView implements View {
 
     private GommaService gommaService;
     private String mode;
+    private String role;
+    private String nomeUtente;
+    private String password;
 
-  public GommaView () {
+  public GommaView() {
       this.gommaService = new GommaService();
       this.mode = "all";
   }
 
     @Override
     public void showResults(Request request) {
-       this.mode  = (String) request.get("mode");
+
+      this.mode  = (String) request.get("mode");
+      role=(String)request.get("role");
+      nomeUtente= (String)request.get("nomeUtente");
+      password= (String)request.get("password");
     }
 
     @Override
@@ -41,7 +47,10 @@ public class GommaView implements View {
                 String manufacturer = getInput();
                 System.out.println("Prezzo:");
                 double price = Double.parseDouble(getInput());
-                gommaService.insertGomma(new Gomma(null,model, manufacturer, price));
+                gommaService.insertGomma(new Gomma(null,model,manufacturer,price));
+                break;
+
+
         }
     }
 
@@ -53,8 +62,12 @@ public class GommaView implements View {
 
     @Override
     public void submit() {
-        MainDispatcher.getInstance().callAction("Home", "doControl", null);
-    }
+        Request request = new Request();
+        request.put("role", role);
+        request.put("nomeUtente", nomeUtente);
+        request.put("password", password);
+        MainDispatcher.getInstance().callAction("Home", "doControl", request);
+}
 
 
 
