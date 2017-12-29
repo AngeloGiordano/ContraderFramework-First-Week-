@@ -1,15 +1,26 @@
 package main.model;
 
-public class Gomma {
+import java.util.Objects;
 
+public class Gomma {
+    private Integer idGomma;
     private String model;
     private String manufacturer;
     private double price;
 
-    public Gomma(String model, String manufacturer, double price) {
+    public Gomma(Integer idGomma,String model, String manufacturer, double price) {
+        this.idGomma=idGomma;
         this.model = model;
         this.manufacturer = manufacturer;
         this.price = price;
+    }
+
+    public Integer getIdGomma() {
+        return idGomma;
+    }
+
+    public void setIdGomma(Integer idGomma) {
+        this.idGomma = idGomma;
     }
 
     public String getModel() {
@@ -40,28 +51,22 @@ public class Gomma {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Gomma gomma = (Gomma) o;
-
-        if (Double.compare(gomma.price, price) != 0) return false;
-        if (model != null ? !model.equals(gomma.model) : gomma.model != null) return false;
-        return manufacturer != null ? manufacturer.equals(gomma.manufacturer) : gomma.manufacturer == null;
+        return Double.compare(gomma.price, price) == 0 &&
+                Objects.equals(idGomma, gomma.idGomma) &&
+                Objects.equals(model, gomma.model) &&
+                Objects.equals(manufacturer, gomma.manufacturer);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = model != null ? model.hashCode() : 0;
-        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+
+        return Objects.hash(idGomma, model, manufacturer, price);
     }
 
     @Override
     public String toString() {
-        return "Model: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
+        return "GOMMA: \nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
 
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class GommaDAO {
 
     private final String QUERY_ALL = "select * from gomme";
-    private final String QUERY_INSERT = "insert into gomme (model, manufacturer, price) values (?,?,?)";
+    private final String QUERY_INSERT = "insert into gomme (idGomma,model, manufacturer, price) values (null,?,?,?)";
 
     public GommaDAO() {
 
@@ -24,10 +24,11 @@ public class GommaDAO {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
            while (resultSet.next()) {
+               int idGomma = resultSet.getInt("idGomma");
                String model = resultSet.getString("model");
                String manufacturer = resultSet.getString("manufacturer");
                double price = resultSet.getDouble("price");
-               gomme.add(new Gomma(model, manufacturer, price));
+               gomme.add(new Gomma(idGomma,model, manufacturer, price));
            }
         }
         catch (SQLException e) {

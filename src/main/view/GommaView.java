@@ -41,7 +41,7 @@ public class GommaView implements View {
                 String manufacturer = getInput();
                 System.out.println("Prezzo:");
                 double price = Double.parseDouble(getInput());
-                gommaService.insertGomma(new Gomma(model, manufacturer, price));
+                gommaService.insertGomma(new Gomma(null,model, manufacturer, price));
         }
     }
 

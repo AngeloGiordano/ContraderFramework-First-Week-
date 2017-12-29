@@ -20,7 +20,7 @@ public class HomeController implements Controller {
             else
                 MainDispatcher.getInstance().callAction("Login", "doControl", request);
         }
-        else MainDispatcher.getInstance().callView("Home", null);
+        else MainDispatcher.getInstance().callView("Home",null);
 
     }
 }
